@@ -1,0 +1,1 @@
+SELECT id, acname, role, name, email FROM users WHERE acname = ? AND password = ?;

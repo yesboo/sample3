@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="アカウント名:" />
+            <h:inputText value="#{userBean.user.acname}" />
+
+            <h:outputLabel value="パスワード:" />
+            <h:inputSecret value="#{userBean.user.password}" />
+
+            <h:outputLabel value="ロール (0:admin, 1:user):" />
+            <h:inputText value="#{userBean.user.role}" />
+
+            <h:outputLabel value="氏名:" />
+            <h:inputText value="#{userBean.user.name}" />
+
+            <h:outputLabel value="メール:" />
+            <h:inputText value="#{userBean.user.email}" />
+        </h:panelGrid>
+
+        <h:commandButton value="修正" action="#{userBean.updateUser}" />
+    </h:form>
+</html>

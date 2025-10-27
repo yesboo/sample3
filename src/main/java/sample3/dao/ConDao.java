@@ -24,5 +24,5 @@ public class ConDao {
 
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
-    }
+    } 
 }

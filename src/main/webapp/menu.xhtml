@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+  <h:panelGroup rendered="#{user.role == 1}">
+    <h:outputText value="ようこそ管理者 #{user.name} さん" />
+    <h:link value="ユーザー管理" outcome="userAdmin" />
+    <h:link value="プロフィール管理" outcome="profile" />
+  </h:panelGroup>
+
+  <h:panelGroup rendered="#{user.role != 1}">
+    <h:outputText value="ようこそ #{user.name} さん" />
+    <h:link value="プロフィール管理" outcome="profile" />
+  </h:panelGroup>
+</h:body>
+</ui:composition>

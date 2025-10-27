@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form>
+        <h:panelGrid columns="4">
+            <h:selectOneRadio value="#{userBean.selectedId}">
+                <f:selectItem itemValue="#{userBean.user.id}" />
+            </h:selectOneRadio>
+
+            <h:outputText value="#{userBean.user.id}" />
+            <h:outputText value="#{userBean.user.acname}" />
+            <h:outputText value="#{userBean.user.name}" />
+        </h:panelGrid>
+        <h:commandButton value="修正" action="#{userBean.updateUser}" />
+    </h:form>
+</html>
