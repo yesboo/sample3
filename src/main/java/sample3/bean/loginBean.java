@@ -11,61 +11,26 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import sample3.dao.ConDao;
 import sample3.dao.DaoUtil;
+import sample3.model.User;
 
-@Named
+@Named("loginBean")
 @RequestScoped
 public class loginBean {
-    private int id;
-    private int role;
-    private String name;
-    private String email;
-    private String acname;
-    private String password;
+    private User user = new User(); // model.User を内包
+    private String plainPass;
 
-    // Getters and Setters
-    public int getId() {
-        return id;
+    public User getUser() {
+        return user;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getRole() {
-        return role;
+    public String getPlainPass() {
+        return plainPass;
     }
-    public void setRole(int role) {
-        this.role = role;
-    }   
-
-    public String getEmail() {
-        return email;
-    } 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }   
-
-    public String getAcname() {
-        return acname;
-    }
-    public void setAcname(String acname) {
-        this.acname = acname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    private String hash(String plain) {
-        return DaoUtil.hash(plain);
+    public void setPlainPass(String plainPass) {
+        this.plainPass = plainPass;
     }
     
     public String login() {
@@ -74,20 +39,20 @@ public class loginBean {
         try (Connection conn = ConDao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, getAcname());
-            ps.setString(2, DaoUtil.hash(getPassword())); // パスワードはハッシュ化して照合
-            String xPass = hash(getPassword());
-            System.out.println(xPass);
+            ps.setString(1, user.getAcname());
+            ps.setString(2, DaoUtil.hash(getPlainPass())); // パスワードはハッシュ化して照合
+//            String xPass = hash(getPassword());
+//            System.out.println(xPass);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     // ユーザー情報をBeanに格納
-                    this.id = rs.getInt("id");
-                    this.acname = rs.getString("acname");
-                    this.role = rs.getInt("role");
-                    this.name = rs.getString("name");
-                    this.email = rs.getString("email");
+                    user.setId(rs.getInt("id"));
+                    user.setAcname(rs.getString("acname"));
+                    user.setRole(rs.getInt("role"));
+                    user.setName(rs.getString("name"));
+                    user.setEmail(rs.getString("email"));
 
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", this);
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
                       return "menu?faces-redirect=true";
                 }
             }

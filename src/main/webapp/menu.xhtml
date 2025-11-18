@@ -5,14 +5,18 @@
 
 <h:body>
   <h:panelGroup rendered="#{user.role == 1}">
-    <h:outputText value="ようこそ管理者 #{user.name} さん" />
-    <h:link value="ユーザー管理" outcome="userAdmin" />
-    <h:link value="プロフィール管理" outcome="profile" />
+    <h:panelGrid columns="1">
+      <h:outputText value="ようこそ管理者 #{user.name} さん" />
+      <h:link value="ユーザー管理" outcome="userAdmin" />
+      <h:link value="プロフィール管理" outcome="profile" />
+    </h:panelGrid>
   </h:panelGroup>
 
   <h:panelGroup rendered="#{user.role != 1}">
-    <h:outputText value="ようこそ #{user.name} さん" />
-    <h:link value="プロフィール管理" outcome="profile" />
+    <h:panelGrid columns="1">
+      <h:outputText value="ようこそ #{user.name} さん" />
+      <h:link value="プロフィール管理" outcome="profile" />
+    </h:panelGrid>
   </h:panelGroup>
 </h:body>
 </ui:composition>

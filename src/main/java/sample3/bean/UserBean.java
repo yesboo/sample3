@@ -11,7 +11,7 @@ import sample3.model.User;
 @RequestScoped
 public class UserBean {
     private User user = new User();
-
+   
     public User getUser() {
         return user;
     }

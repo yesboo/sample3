@@ -10,10 +10,10 @@
         <h:panelGrid columns="2" cellpadding="2">
         
             <h:outputLabel for="acname" value="アカウント名:" />
-            <h:inputText id="acname" value="#{loginBean.acname}" required="true" />
+            <h:inputText id="acname" value="#{loginBean.user.acname}" required="true" />
 
             <h:outputLabel for="password" value="パスワード:" />
-            <h:inputSecret id="password" value="#{loginBean.password}" required="true" />
+            <h:inputSecret id="password" value="#{loginBean.plainPass}" required="true" />
         </h:panelGrid>
         <h:commandButton value="ログイン" action="#{loginBean.login}" />
     </h:form>
