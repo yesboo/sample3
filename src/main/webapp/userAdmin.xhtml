@@ -9,29 +9,37 @@
 <h:body>
     <h2>ユーザー管理画面</h2>
 
-    <h:dataTable value="#{findUsers.userList}" var="user" border="1">
-        <h:column>
-            <f:facet name="header">ユーザーID</f:facet>
-            #{user.id}
-        </h:column>
-        <h:column>
-            <f:facet name="header">アカウント名</f:facet>
-            #{user.acname}
-        </h:column>
-        <h:column>
-            <f:facet name="header">ユーザー名</f:facet>
-            #{user.name}
-        </h:column>
-        <h:column>
-            <f:facet name="header">メールアドレス</f:facet>
-            #{user.email}
-        </h:column>
-        <h:column>
-            <f:facet name="header">権限</f:facet>
-            #{user.role}
-        </h:column>
-    </h:dataTable>
-
-    <h:link value="メニューに戻る" outcome="menu.xhtml" />
+    <h:form prependId="false">
+        <h:dataTable value="#{findUsers.userList}" var="user" border="1">
+            <h:column>
+                <f:facet name="header">選択</f:facet>
+                <input type="radio" value="#{user.id}" onclick="document.getElementById('selectedUserId').value=this.value;" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">ユーザーID</f:facet>cd 
+                #{user.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">アカウント名</f:facet>
+                #{user.acname}
+            </h:column>
+            <h:column>
+                <f:facet name="header">ユーザー名</f:facet>
+                #{user.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">メールアドレス</f:facet>
+                #{user.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">権限</f:facet>
+                #{user.role}
+            </h:column>
+        </h:dataTable>
+        <h:commandButton value="編集" action="#{findUsers.editUser}" />
+        <h:commandButton value="追加" action="createUser.xhtml" />
+        <h:inputHidden id="selectedUserId" value="#{findUsers.selectedUserId}" />
+        <h:link value="メニューに戻る" outcome="menu.xhtml" />
+    </h:form>
 </h:body>
 </html>

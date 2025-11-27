@@ -41,8 +41,6 @@ public class loginBean {
 
             ps.setString(1, user.getAcname());
             ps.setString(2, DaoUtil.hash(getPlainPass())); // パスワードはハッシュ化して照合
-//            String xPass = hash(getPassword());
-//            System.out.println(xPass);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     // ユーザー情報をBeanに格納
