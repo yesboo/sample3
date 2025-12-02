@@ -7,9 +7,6 @@
             <h:outputLabel value="アカウント名:" />
             <h:inputText value="#{userBean.user.acname}" />
 
-            <h:outputLabel value="パスワード:" />
-            <h:inputSecret value="#{userBean.user.password}" />
-
             <h:outputLabel value="ロール (0:admin, 1:user):" />
             <h:inputText value="#{userBean.user.role}" />
 
@@ -18,8 +15,13 @@
 
             <h:outputLabel value="メール:" />
             <h:inputText value="#{userBean.user.email}" />
+
+            <h:inputHidden value="#{userBean.user.id}" />
         </h:panelGrid>
 
         <h:commandButton value="修正" action="#{userBean.updateUser}" />
+        <h:commandButton value="パスワード変更" action="#{userBean.changePassword}" />
+        <!-- メッセージ表示 -->
+        <h:messages globalOnly="true" layout="table" />
     </h:form>
 </html>
