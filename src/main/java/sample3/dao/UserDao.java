@@ -48,7 +48,7 @@ public class UserDao {
             User u = new User();
             while(rs.next()){
                 u.setId(rs.getInt("id"));
-                u.setPassword(rs.getString("password"));
+                u.setHashedPassword(rs.getString("password"));
                 u.setAcname(rs.getString("acname"));
                 u.setRole(rs.getInt("role"));
                 u.setName(rs.getString("name"));
@@ -67,7 +67,7 @@ public class UserDao {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, user.getAcname());
-            ps.setString(2, user.getPassword()); // ハッシュ済み
+            ps.setString(2, user.getHashedPassword()); // ハッシュ済み
             ps.setInt(3, user.getRole());
             ps.setString(4, user.getName());
             ps.setString(5, user.getEmail());
@@ -92,6 +92,24 @@ public class UserDao {
             ps.setString(3, user.getName());
             ps.setString(4, user.getEmail());
             ps.setInt(5, user.getId());
+
+            return ps.executeUpdate();  //更新されれば、１件以上を返す。
+        } catch (SQLException e) {
+            System.err.println("SQL例外発生:");
+            System.err.println("メッセージ: " + e.getMessage());
+            System.err.println("SQLState: " + e.getSQLState());
+            e.printStackTrace();
+            return 0;   //更新件数０件とする。
+        }
+    }
+    public int updatePassword(int uid, String hashedPassword) throws Exception{
+//        String sql = "UPDATE users SET password=? WHERE id = ?";
+        String sql = "UPDATE users SET password='" +hashedPassword+ "'' WHERE id = " +uid;
+
+        try (Connection conn = ConDao.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+//          ps.setString(1, hashedPassword);
+//          ps.setInt(2, uid);
 
             return ps.executeUpdate();  //更新されれば、１件以上を返す。
         } catch (SQLException e) {

@@ -3,10 +3,10 @@ package sample3.model;
 public class User {
     private int id;
     private String acname;
-    private String password;
     private int role;
     private String name;
     private String email;
+    private String hashedPassword;
 
     // Getters and Setters
     public int getId() {
@@ -21,13 +21,6 @@ public class User {
     }
     public void setAcname(String acname) {
         this.acname = acname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public int getRole() {
@@ -48,5 +41,13 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+    public void setHashedPassword(String hashedPass){
+        this.hashedPassword = hashedPass;
+    }
+
 }
 

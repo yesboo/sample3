@@ -9,11 +9,11 @@ import jakarta.inject.Named;
 import sample3.dao.UserDao;
 import sample3.model.User;
 
-@Named
+@Named("findUsers")
 @RequestScoped
-public class findUsers implements Serializable {
+public class FindUsers implements Serializable {
     private List<User> userList;
-   private Integer selectedUserId;
+    private Integer selectedUserId;
 
    @PostConstruct
     public void init(){
@@ -31,6 +31,11 @@ public class findUsers implements Serializable {
 
     public String editUser(){
         //選択されている対象のユーザーIDを取得し、編集画面へ遷移
-        return "profile.xhtml?faces-redirect=true&userId=" + selectedUserId;
+        return "editUserByAdmin.xhtml?faces-redirect=true&userId=" + selectedUserId;
+    }
+
+    public String changePassword(){
+        //選択されている対象のユーザーIDを取得し、編集画面へ遷移
+        return "changePass.xhtml?faces-redirect=true&userId=" + selectedUserId;
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <title>ユーザー編集</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="アカウント名:" />
+            <h:inputText value="#{adminUserEdit.targetUser.acname}" />
+
+            <h:outputLabel value="氏名:" />
+            <h:inputText value="#{adminUserEdit.targetUser.name}" />
+
+            <h:outputLabel value="メール:" />
+            <h:inputText value="#{adminUserEdit.targetUser.email}" />
+
+            <h:outputLabel value="権限:" />
+            <h:inputText value="#{adminUserEdit.targetUser.role}" />
+
+        </h:panelGrid>
+
+        <h:commandButton value="更新" action="#{adminUserEdit.updateUser}" />
+    </h:form>
+</h:body>
+</html>

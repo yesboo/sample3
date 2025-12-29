@@ -21,7 +21,7 @@ public class ConDao {
             }
             props.load(in);
             HikariConfig config = new HikariConfig(props);
-            dataSource = new HikariDataSource(config);
+            dataSource = new HikariDataSource(config);  
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize HikariDataSource", e);
         }

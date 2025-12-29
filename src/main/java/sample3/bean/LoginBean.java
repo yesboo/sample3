@@ -13,9 +13,9 @@ import sample3.dao.ConDao;
 import sample3.dao.DaoUtil;
 import sample3.model.User;
 
-@Named("loginBean")
+@Named
 @RequestScoped
-public class loginBean {
+public class LoginBean {
     private User user = new User(); // model.User を内包
     private String plainPass;
 
@@ -25,14 +25,14 @@ public class loginBean {
     public void setUser(User user) {
         this.user = user;
     }
-
     public String getPlainPass() {
         return plainPass;
     }
-    public void setPlainPass(String plainPass) {
+
+    public void setPlainPass(String plainPass){
         this.plainPass = plainPass;
     }
-    
+
     public String login() {
         String sql = DaoUtil.loadSql("find_user.sql");
 
@@ -43,15 +43,18 @@ public class loginBean {
             ps.setString(2, DaoUtil.hash(getPlainPass())); // パスワードはハッシュ化して照合
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    // ユーザー情報をBeanに格納
+                    // ユーザー情報をBeanに格納mvn clean 
                     user.setId(rs.getInt("id"));
                     user.setAcname(rs.getString("acname"));
                     user.setRole(rs.getInt("role"));
                     user.setName(rs.getString("name"));
                     user.setEmail(rs.getString("email"));
 
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
-                      return "menu?faces-redirect=true";
+                    //loginUser Beanに渡す
+                    LoginUser loginUserBean = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(),"#{loginUser}",LoginUser.class);
+                    loginUserBean.setUser(user);
+                    
+                    return "menu?faces-redirect=true";
                 }
             }
         } catch (SQLException e) {
@@ -66,4 +69,5 @@ public class loginBean {
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "ログイン失敗", "アカウント名またはパスワードが違います"));
         return null;
     }
+    
 }
