@@ -38,6 +38,7 @@ public class AdminUserEdit implements Serializable {
         try {
             String newPass = generateRandomPassword();       
             String hashed = DaoUtil.hash(newPass);
+
             UserDao udao = new UserDao();
             udao.updatePassword(targetUser.getId(), hashed);
             return null;

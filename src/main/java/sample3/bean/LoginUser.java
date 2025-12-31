@@ -6,6 +6,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import sample3.dao.DaoUtil;
 import sample3.dao.UserDao;
 import sample3.model.User;
 
@@ -76,11 +77,11 @@ public class LoginUser implements Serializable {
     public String changePassword(){
         if (!newPassword.equals(confirmPassword)){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "パスワードが一致しません", null));
-            return null;
+              return null;
         }
         //DB更新
         int uid = user.getId();
-        String hashedPassword = hash(newPassword);
+        String hashedPassword = DaoUtil.hash(newPassword);
         String reDirectString = "";
         try {
             if (new UserDao().updatePassword(uid, hashedPassword) == 1){

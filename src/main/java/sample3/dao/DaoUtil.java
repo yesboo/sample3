@@ -19,6 +19,7 @@ public class DaoUtil {
     }
 
     public static String hash(String plain) {
+        System.out.println("HASH METHOD CALLED: " + plain);
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = md.digest(plain.getBytes(StandardCharsets.UTF_8));
