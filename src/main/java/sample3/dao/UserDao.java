@@ -103,13 +103,10 @@ public class UserDao {
         }
     }
     public int updatePassword(int uid, String hashedPassword) throws Exception{
-//        String sql = "UPDATE users SET password=? WHERE id = ?";
         String sql = "UPDATE users SET password='" +hashedPassword+ "' WHERE id = " +uid;
 
         try (Connection conn = ConDao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-//          ps.setString(1, hashedPassword);cd 
-//          ps.setInt(2, uid);
 
             return ps.executeUpdate();  //更新されれば、１件以上を返す。
         } catch (SQLException e) {

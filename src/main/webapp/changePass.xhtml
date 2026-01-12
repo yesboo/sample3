@@ -38,10 +38,11 @@ function checkPassword(){
             
         </h:panelGrid>
 
-        <h:commandButton value="変更" action="#{loginUser.changePassword}" onclick="return checkPassword();" />
+        <p:commandButton value="変更" action="#{loginUser.changePassword}" update="messages" onclick="return checkPassword();" />
         <h:commandButton value="キャンセル" action="profile.xhtml" />
     </h:form>
     <!-- メッセージ表示 -->
     <h:outputText id="msg" value="" style="color:red;" />
+    <h:messages id="messages" globalOnly="true" style="color:green;" />
 </h:body>
 </html>

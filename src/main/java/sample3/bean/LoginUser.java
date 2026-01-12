@@ -97,5 +97,24 @@ public class LoginUser implements Serializable {
         return reDirectString;
     }
     
+    public String resetPassword(){
+        String restPassword = "Password";
+        //DB更新
+        int uid = user.getId();
+        String hashedPassword = DaoUtil.hash(restPassword);
+        String reDirectString = "";
+        try {
+            if (new UserDao().updatePassword(uid, hashedPassword) == 1){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "パスワードを初期化しました。", null));
+                reDirectString = "changePass.xhtml?faces-redirect=false";
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "パスワードの初期化に失敗しました。", null));
+                reDirectString = "changePass.xhtml?faces-redirect=false";
+            }            
+        } catch (Exception e) {
+        }
+        //画面再描画
+        return reDirectString;
+    }
 
 }

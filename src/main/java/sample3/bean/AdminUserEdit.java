@@ -36,14 +36,16 @@ public class AdminUserEdit implements Serializable {
 
     public String resetPassword(){
         try {
-            String newPass = generateRandomPassword();       
+            String newPass = "password";       
             String hashed = DaoUtil.hash(newPass);
 
             UserDao udao = new UserDao();
             udao.updatePassword(targetUser.getId(), hashed);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "パスワードをリセットしました", null));
             return null;
         }catch(Exception e){
             e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "パスワードをリセット失敗しました", null));
             return null;
         }
     }
