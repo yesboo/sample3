@@ -137,6 +137,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.3</version> <!-- 最新安定版（2025年時点） -->
         </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>13.0.0</version>
+            <classifier>jakarta</classifier>
+        </dependency>
     </dependencies>
     
     <build>

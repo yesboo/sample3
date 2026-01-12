@@ -23,4 +23,5 @@
         <extension>xhtml</extension>
         <mime-type>application/xhtml+xml</mime-type>
     </mime-mapping>
+    
 </web-app>
